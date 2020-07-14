@@ -5,5 +5,9 @@ library(lubridate)
 dailycsv <- read_csv("./rawdata/daily.csv")
 
 datesintable <- c("date", "dateChecked", "lastModified")
-dailycsv %>% 
-  ymd(datesintable)
+
+dailycsv$date <-  ymd(dailycsv$date)
+
+ggplot (dailycsv, aes(x=date, y=deathIncrease)) +
+  geom_line()
+
