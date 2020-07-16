@@ -15,6 +15,7 @@ dailycsv <- dailycsv %>% mutate (
   
 ggplot (dailycsv, aes(x=date )) +
   geom_line(aes(y=deathIncrease), color = "red") +
-  geom_line(aes(y=deathRolling), color  = "blue")
+  geom_line(aes(y=deathRolling), color  = "blue") +
+  ggtitle("Numbers and Rolling Average")
 
 
