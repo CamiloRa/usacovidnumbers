@@ -7,7 +7,9 @@ datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
 rolling_mean <- rollify(mean, window = 14 )
 
-dailycsv <- dailycsv %>% mutate (
+dailycsv <- dailycsv %>%
+  group_by(state) %>% 
+  mutate (
   deathRolling = rolling_mean(deathIncrease)
 )
   
