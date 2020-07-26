@@ -7,17 +7,17 @@ datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
 rolling_mean <- rollify(mean, window = 14 )
 
-dailycsv <- dailycsv %>%
-  group_by(state) %>% 
+daily_rolling <- dailycsv %>%
   mutate (
   deathRolling = rolling_mean(deathIncrease)
 )
-  
 
-  
-ggplot (dailycsv, aes(x=date )) +
+
+ggplot (daily_rolling, aes(x=date )) +
   geom_line(aes(y=deathIncrease), color = "red") +
-  geom_line(aes(y=deathRolling), color  = "blue") +
   ggtitle("Numbers and Rolling Average")
 
+ggplot (totalUSA, aes(x=date, y=deathIncrease)) +
+  geom_line(color = "red") +
+  ggtitle("Numbers and Rolling Average")
 
