@@ -5,6 +5,7 @@ library(tibbletime)
 dailycsv <- read_csv("./rawdata/daily.csv")
 datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
+dailycsv$state <-  as.factor(dailycsv$state)
 rolling_mean <- rollify(mean, window = 14 )
 
 daily_rolling <- dailycsv %>% select("date", "state", "death", "positive")
@@ -14,7 +15,7 @@ daily_rolling <- daily_rolling %>%
 #  deathRolling = rolling_mean(deathIncrease)
 #) %>% 
   group_by(state) %>% 
-  summarise(date, positive, death)
+  summarize(positive, death)
 
 
 
