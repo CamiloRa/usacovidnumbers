@@ -7,10 +7,15 @@ datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
 rolling_mean <- rollify(mean, window = 14 )
 
-daily_rolling <- dailycsv %>%
-  mutate (
-  deathRolling = rolling_mean(deathIncrease)
-)
+daily_rolling <- dailycsv %>% select("date", "state", "death", "positive")
+
+daily_rolling <- daily_rolling %>%
+#  mutate (
+#  deathRolling = rolling_mean(deathIncrease)
+#) %>% 
+  group_by(state) %>% 
+  summarise(date, positive, death)
+
 
 
 ggplot (daily_rolling, aes(x=date )) +
