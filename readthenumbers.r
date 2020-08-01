@@ -10,12 +10,12 @@ rolling_mean <- rollify(mean, window = 14 )
 
 daily_rolling <- dailycsv %>% select("date", "state", "death", "positive")
 
-daily_rolling <- daily_rolling %>%
+daily_rolling2 <- daily_rolling %>%
 #  mutate (
 #  deathRolling = rolling_mean(deathIncrease)
 #) %>% 
-  group_by(state) %>% 
-  summarize(positive, death)
+  group_by(date) %>% 
+  summarize(sum(positive), sum(death))
 
 
 
