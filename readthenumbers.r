@@ -8,7 +8,7 @@ dailycsv$date <-  ymd(dailycsv$date)
 #dailycsv$state <-  as.factor(dailycsv$state)
 rolling_mean <- rollify(mean, window = 14 )
 
-daily_rolling <- dailycsv %>% select("date", "state", "death", "positive")
+daily_rolling <- dailycsv %>% select("date",  "death", "positive")
 
 daily_rolling2 <- daily_rolling %>%
 #  mutate (
