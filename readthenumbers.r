@@ -1,23 +1,29 @@
+
+# install libraries -------------------------------------------------------
+
 library(tidyverse)
 library(lubridate)
 library(tibbletime)
-#read data
+library(cowplot)
+# read data ---------------------------------------------------------------
+
 dailycsv <- read_csv("./rawdata/daily.csv")
 datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
 #dailycsv$state <-  as.factor(dailycsv$state)
 rolling_mean <- rollify(mean, window = 14 )
 
-daily_rolling <- dailycsv %>% select("date",  "death", "positive")
+daily_rolling <- dailycsv %>% select("date",  "death", "positive", "deathIncrease")
 
 daily_rolling2 <- daily_rolling %>%
-#  mutate (
-#  deathRolling = rolling_mean(deathIncrease)
-#) %>% 
+  mutate (
+  deathRolling = rolling_mean(deathIncrease)
+) %>% 
   group_by(date) %>% 
   summarize(sum(positive), sum(death))
 
 
+# plots -------------------------------------------------------------------
 
 ggplot (daily_rolling, aes(x=date )) +
   geom_line(aes(y=deathIncrease), color = "red") +
