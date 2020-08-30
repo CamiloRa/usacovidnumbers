@@ -7,7 +7,7 @@ library(tibbletime)
 library(cowplot)
 # read data ---------------------------------------------------------------
 
-dailycsv <- read_csv("./rawdata/daily.csv")
+dailycsv <- read_csv("./rawdata/national-history.csv")
 datesintable <- c("date", "dateChecked", "lastModified")
 dailycsv$date <-  ymd(dailycsv$date)
 #dailycsv$state <-  as.factor(dailycsv$state)
@@ -19,14 +19,17 @@ daily_rolling <- dailycsv %>% select("date",  "death", "positive", "deathIncreas
 
 daily_rolling2 <- daily_rolling %>%
   mutate (
-  deathRolling = rolling_mean(deathIncrease)
+  deathRolling = rolling_mean07(deathIncrease)
 )
 
 
 # plots -------------------------------------------------------------------
 
-plot1 <- ggplot (daily_rolling2, aes(x=date, y= deathIncrease)) +
+figure1 <- ggplot (daily_rolling2, aes(x=date, y= deathIncrease)) +
   geom_line(color = "red") +
   ggtitle("Numbers and Rolling Average")
 
-plot1
+figure1
+
+figure2 <- figure1 + geom_smooth(method = "loess") 
+figure2
