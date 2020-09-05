@@ -33,3 +33,7 @@ figure1
 
 figure2 <- figure1 + geom_smooth(method = "loess") 
 figure2
+
+# smoothing over othewr days ----------------------------------------------
+
+
