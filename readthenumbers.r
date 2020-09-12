@@ -27,12 +27,17 @@ daily_rolling2 <- daily_rolling %>%
 
 figure1 <- ggplot (daily_rolling2, aes(x=date, y= deathIncrease)) +
   geom_line(color = "red") +
-  ggtitle("Numbers and Rolling Average")
-
+  ggtitle("Numbers and Rolling Average") +
+  geom_smooth(method = "loess") 
 figure1
 
-figure2 <- figure1 + geom_smooth(method = "loess") 
+figure2 <- ggplot(daily_rolling2) +
+  aes(x = date, y = deathRolling) +
+  geom_line(size = 1L, colour = "#0c4c8a") +
+  labs(x = "Date", y = "Numbers", title = "Covid Deaths", subtitle = "7 day rolling avg") +
+  theme_minimal() + geom_smooth(method = "loess") 
 figure2
+
 
 # smoothing over othewr days ----------------------------------------------
 
