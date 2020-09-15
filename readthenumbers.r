@@ -38,6 +38,9 @@ figure2 <- ggplot(daily_rolling2) +
   theme_minimal() + geom_smooth(method = "loess") 
 figure2
 
+# cowplotting over figures ------------------------------------------------
+
+cowplot::plot_grid(figure1, figure2, labels =  "AUTO", ncol = 1)
 
 # smoothing over othewr days ----------------------------------------------
 
