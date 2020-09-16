@@ -28,8 +28,7 @@ daily_rolling2 <- daily_rolling %>%
 figure1 <- ggplot (daily_rolling2, aes(x=date, y= deathIncrease)) +
   geom_line(color = "red") +
   ggtitle("Numbers and Rolling Average") +
-  geom_smooth(method = "loess")
-# scale_x_discrete(name = "months")
+  geom_smooth(method = "loess") 
 figure1
 
 figure2 <- ggplot(daily_rolling2) +
@@ -39,9 +38,6 @@ figure2 <- ggplot(daily_rolling2) +
   theme_minimal() + geom_smooth(method = "loess") 
 figure2
 
-# cowplotting over figures ------------------------------------------------
-
-cowplot::plot_grid(figure1, figure2, labels =  "AUTO", ncol = 1)
 
 # smoothing over other days ----------------------------------------------
 
