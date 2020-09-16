@@ -38,7 +38,7 @@ figure2 <- ggplot(daily_rolling2) +
   theme_minimal() + geom_smooth(method = "loess") 
 figure2
 
-
+plot_grid(figure1, figure2, ncol = 1)
 # smoothing over other days ----------------------------------------------
 
 
